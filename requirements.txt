@@ -1,0 +1,12 @@
+# A2 MVEP replication package: pinned verified-good stack.
+#
+# Python >= 3.10 required. The three exhibit scripts use only the Python standard
+# library (csv, re, pathlib, textwrap) plus matplotlib; there are no other
+# third-party dependencies. Verified on Python 3.14.5 with the pin below.
+#
+# The exhibits are fully deterministic (no randomness, no timestamps, no network
+# or external data), so the data CSVs and every printed number reproduce exactly on
+# any platform. PNG bytes are reproducible with the pinned matplotlib version; other
+# matplotlib versions are expected to reproduce the figures but may differ
+# cosmetically (anti-aliasing, font hinting, sub-pixel placement).
+matplotlib==3.10.8
