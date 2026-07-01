@@ -55,7 +55,7 @@ Validation (the acceptance test the rule must pass): the rating must reproduce t
 paper's qualitative ordering from the matrix mechanically. JPMD carries the only
 non-Non-Equivalent Legal tier (Finding 5: closest to passing). The tokenized funds
 (BENJI, BUIDL, OUSG) carry strong Economic tiers; USDY's Economic tier now reflects
-its recursive Cash Settlement Asset fail (redemption into USDC). USDT and DAI fail across
+its recursive Cash Settlement Asset fail (redemption into USDC, the B7 2026-06-29 correction). USDT and DAI fail across
 dimensions. If the rule did not reproduce this, the rule would be wrong, not the
 paper. The script prints the validation summary on each run.
 
