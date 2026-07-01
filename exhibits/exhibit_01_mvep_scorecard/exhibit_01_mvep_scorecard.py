@@ -243,7 +243,7 @@ def render():
     # categories = Y-axis rows. The CSV keeps the category-row by product-column
     # orientation, which matches this rendering.
     nrows, ncols = len(CATEGORIES), len(PRODUCTS)
-    fig, ax = plt.subplots(figsize=(0.95 * ncols + 4.6, 0.66 * nrows + 4.2))
+    fig, ax = plt.subplots(figsize=(0.95 * ncols + 4.6, 0.54 * nrows + 4.2))
     for r in range(nrows):
         for c, code in enumerate(CODES):
             v, src = cell(code, r)
@@ -278,7 +278,7 @@ def render():
     ax.legend(handles=legend, loc="upper center", bbox_to_anchor=(0.5, -0.055),
               ncol=len(legend_order), fontsize=9.5, frameon=False, handlelength=1.1)
     ax.set_title(textwrap.fill("MVEP v4 scorecard: per-product verdicts across the ten categories and the recursive Cash Settlement Asset analysis", 60),
-                 fontsize=24.0, fontweight="bold", pad=30)
+                 fontsize=16.0, fontweight="bold", pad=16)
     fig.tight_layout(rect=[0, 0.18, 1, 1])
     _p = ax.get_position()
     _fx = (_p.x0 + _p.x1) / 2.0
