@@ -10,7 +10,7 @@ underlying factor (PAPER.md Finding 6), and the weakest-link logic the paper use
 for composed products (equivalence is the minimum across layers). It is instead a
 non-compensatory FLOOR aggregation, the next-level analog of the Exhibit 2 Category 5
 Q1a aggregation rule (which collapses seven insolvency dimensions into one verdict
-non-compensatively): here it collapses the eleven category verdicts into a
+non-compensatively): here it collapses the ten category verdicts plus the Cash Settlement Asset companion test into a
 per-dimension grade and a weakest-link headline.
 
 Design:
@@ -46,7 +46,7 @@ for every product in the sample except JPMD on the structural, market-wide UCC
 Article 12 qualifying-purchaser defect (Section 4.3), so the Legal dimension is
 ceilinged at Non-Equivalent for all but JPMD and the weakest-link headline is
 Non-Equivalent for all but JPMD. This is a FEATURE, not a defect of the rating: it
-surfaces the paper's central finding (no product achieves equivalence) at a glance.
+surfaces the paper's central finding (no matrix product achieves equivalence) at a glance.
 Cross-product discrimination therefore lives in the Operational and Economic tiers,
 in the within-Legal insolvency posture (Category 5) and custody (Category 4), and in
 the coverage band. The vector is the rating; the scalar headline is the thesis.
@@ -307,7 +307,7 @@ def write_csv(products, ratings):
     return out
 
 
-# --- visual-encoding helpers for the rendering (2026-06-13 readability redesign) ---
+# --- visual-encoding helpers for the rendering ---
 # GATE tag = the non-compensatory verdict (the thesis channel); kept short for the cell.
 GATE_TAG = {
     "EQUIVALENT": ("EQUIV", "#2e7d32"),
@@ -548,7 +548,7 @@ def render(products, ratings):
         fontsize=13.5, fontweight="bold", pad=26)
     foot = ("STRENGTH (the shade and the number) scores each Exhibit 1 cell on the rung scale Pass = 5, Partial = 4, Ambiguous = 3, "
             "Not-disclosed = 2, Fail = 1. Each dimension's strength is the mean score over its categories; the OVERALL strength (top row) is the "
-            "mean score over all eleven gradeable cells (the ten categories plus the recursive Cash Settlement Asset; Not-applicable and "
+            "mean score over all gradeable cells (the ten categories plus the recursive Cash Settlement Asset companion test; Not-applicable and "
             "Unassessed cells are excluded). The scale runs to 5 (every cell Pass = full equivalence); no product reaches it (the achievable "
             "ceiling is about 4.6, since the market-wide Rights Parity defect pins one cell at 1). Strength sets the left-to-right ranking but "
             "never lifts the non-compensatory gate, which holds every product at Non-Equivalent except JPMD on the Legal tier. Deterministic "

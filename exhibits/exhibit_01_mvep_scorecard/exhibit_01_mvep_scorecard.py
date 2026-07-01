@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""exhibit_01_mvep_scorecard: consolidated MVEP v4 scorecard matrix.
+"""exhibit_01_mvep_scorecard: consolidated MVEP scorecard matrix.
 
 Synthesizes the per-product MVEP verdicts of record in A2 PAPER.md into one
 10-category-plus-CSA by product matrix, marking unassessed cells. Every of-record
-cell is sourced to its origin in PAPER.md (Table 4 at Section 5.4; the v4 summary
+cell is sourced to its origin in PAPER.md (Table 4 at Section 5.4; the summary
 table at Section 4.8; Findings 5 and 6; the per-product worked examples in the
 Supplementary Materials). USYC is an offshore-comparator scoring (tag NEW),
 flagged distinctly. The USYC Category 4 Custody verdict is AMBIGUOUS: the only
@@ -50,7 +50,7 @@ all-network holders (44,053 on Ethereum via the 2026-06-11 Blockscout
 cross-check); majority of supply
 off-Ethereum across nine chains per CoinGecko, eleven networks per the issuer
 contract registry). USD1 (tag NEW2) is scored across
-all eleven cells against the product's primary documents and on-chain state:
+all ten category cells plus the Cash Settlement Asset companion-test cell against the product's primary documents and on-chain state:
 Cat 1 FAIL; Cat 2 AMBIGUOUS records-at-multiple-layers; Cat 3 PARTIAL; Cat 4
 AMBIGUOUS; Cat 5 AMBIGUOUS per the Exhibit 2 federal-layer (J3F) trust-stack
 derivation; Cat 6 FAIL; Cat 7
@@ -68,7 +68,7 @@ assessment was performed), and the footer explains the single N/A cell
 (BENJI Category 8: traditional fund, no on-chain admin keys, per Table 4).
 
 Axis orientation: the rendered matrix has products as the X-axis columns and the
-ten categories plus the recursive Cash Settlement Asset analysis as the Y-axis
+ten categories plus the recursive Cash Settlement Asset companion test as the Y-axis
 rows. This matches the CSV orientation (category rows by product columns), so the
 figure and the source CSV share one orientation and existing row-number citations
 into mvep_scorecard_data.csv remain valid.
@@ -100,7 +100,7 @@ thirteenth column for the first stablecoin issued by an FDIC-insured full-servic
 US national bank (SoFi Bank, N.A., FDIC Cert 26881, OCC-regulated; holding company
 SoFi Technologies; two launches, enterprise 2025-12-18 and consumer-app
 2026-05-27; ticker SOFID; Ethereum and Solana; approximately USD 0.15B per rwa.xyz
-2026-06-12, thin parked supply). All eleven cells are graded:
+2026-06-12, thin parked supply). All ten category cells plus the Cash Settlement Asset companion-test cell are graded:
 Cat 1 FAIL, Cat 2 AMBIGUOUS, Cat 3 NOT_DISCLOSED, Cat 4 AMBIGUOUS, Cat 5 AMBIGUOUS
 (Exhibit 2 J2S insured-bank non-deposit sub-row), Cat 6 FAIL, Cat 7 NOT_DISCLOSED,
 Cat 8 FAIL, Cat 9 PARTIAL, Cat 10 AMBIGUOUS, Cash Settlement Asset PARTIAL. The
@@ -142,8 +142,8 @@ LEVELS = {
     "UNASSESSED": ("Unassessed", "#f5f5f5", "#9e9e9e"),
 }
 
-# Categories (rows). The ten MVEP categories plus the v4 recursive Cash
-# Settlement Asset analysis as a distinct axis (the summary table breaks it out).
+# Categories (rows). The ten MVEP categories plus the recursive Cash
+# Settlement Asset companion test as a distinct axis (the summary table breaks it out).
 CATEGORIES = [
     "1. Rights Parity",
     "2. System of Record",
@@ -155,7 +155,7 @@ CATEGORIES = [
     "8. Governance & Change Control",
     "9. Disclosures",
     "10. Collateral Operability",
-    "Cash Settlement Asset (v4 recursive)",
+    "Cash Settlement Asset (companion test)",
 ]
 
 # Products (columns). Grouped: regulated stablecoins, unregulated/decentralized,
@@ -182,9 +182,9 @@ SCALE = [
 ]
 
 # Verdict matrix. Key = product short code; value = dict category-index -> (verdict, source-tag).
-# Source tags: T2 = Section 5.4 Table 4; SUM = Section 4.8 v4 summary table; F5/F6 = Findings 5/6;
+# Source tags: T2 = Section 5.4 Table 4; SUM = the summary table; F5/F6 = Findings 5/6;
 # WE = worked example; NEW = USYC offshore comparator scoring;
-# NEW2 = USD1 GENIUS-era comparator scoring (all eleven cells against primary
+# NEW2 = USD1 GENIUS-era comparator scoring (all ten category cells plus the Cash Settlement Asset companion-test cell against primary
 #       documents and on-chain state, see CAPTION.md);
 # RWA = grounded in the rwa.xyz platform snapshot (scale source of record);
 # CP = coverage-completion scoring (the nineteen previously-unassessed
@@ -195,7 +195,7 @@ SCALE = [
 #      per-cell basis in CAPTION.md coverage-completion table;
 # JX = derived from the Exhibit 2 Category 5 jurisdiction matrix (exhibit_02_cat5_jurisdiction_matrix)
 #      under its scoring rules (USD1 and PYUSD per the federal-layer J3F derivation).
-# NEW5 = NYDFS-trust-charter comparator scoring (RLUSD column only): all eleven cells graded against the
+# NEW5 = NYDFS-trust-charter comparator scoring (RLUSD column only): all ten category cells plus the Cash Settlement Asset companion-test cell graded against the
 #       product's primary documents (User Terms; signed Deloitte and Touche attestation; the NYDFS
 #       trust-charter grant and the 2025 custodial-structures guidance) and the verified on-chain
 #       implementation contract; headline Non-Equivalent, binding Category 1 Rights Parity FAIL. See CAPTION.
@@ -277,13 +277,13 @@ def render():
               for k in legend_order]
     ax.legend(handles=legend, loc="upper center", bbox_to_anchor=(0.5, -0.055),
               ncol=len(legend_order), fontsize=9.5, frameon=False, handlelength=1.1)
-    ax.set_title(textwrap.fill("MVEP v4 scorecard: per-product verdicts across the ten categories and the recursive Cash Settlement Asset analysis", 60),
+    ax.set_title(textwrap.fill("MVEP scorecard: per-product verdicts across the ten categories and the recursive Cash Settlement Asset companion test", 60),
                  fontsize=16.0, fontweight="bold", pad=16)
     fig.tight_layout(rect=[0, 0.18, 1, 1])
     _p = ax.get_position()
     _fx = (_p.x0 + _p.x1) / 2.0
     fig.text(_fx, 0.045, textwrap.fill(
-             "Cell suffix = verdict source (T2 = Section 5.4 Table 4; SUM = Section 4.8 v4 summary table; F5/F6 = Findings 5/6; WE = worked example; NEW = offshore-comparator scoring (USYC column only; per-category basis in the Supplementary Materials); NEW2 = GENIUS-era comparator scoring (USD1 column only; per-category basis in the Supplementary Materials); NEW3 = the fourteen partial-evidence cells across USDC, USDT, USDG, PYUSD, DAI, and JPMD, scored against primary documents and on-chain state, plus the PYUSD Category 4 and Category 5 re-derivation onto the J3F federal-layer stack (per-cell basis in the Supplementary Materials); NEW4 = SoFiUSD insured-national-bank comparator scoring 2026-06-12 (SoFiUSD column only; per-cell basis in the Supplementary Materials); NEW5 = NYDFS-trust-charter comparator scoring (RLUSD column only; graded against primary documents and the verified on-chain contract; per-cell basis in the Supplementary Materials); JX = Exhibit 2 Category 5 jurisdiction matrix cells;"
+             "Cell suffix = verdict source (T2 = Section 5.4 Table 4; SUM = the summary table; F5/F6 = Findings 5/6; WE = worked example; NEW = offshore-comparator scoring (USYC column only; per-category basis in the Supplementary Materials); NEW2 = GENIUS-era comparator scoring (USD1 column only; per-category basis in the Supplementary Materials); NEW3 = the fourteen partial-evidence cells across USDC, USDT, USDG, PYUSD, DAI, and JPMD, scored against primary documents and on-chain state, plus the PYUSD Category 4 and Category 5 re-derivation onto the J3F federal-layer stack (per-cell basis in the Supplementary Materials); NEW4 = SoFiUSD insured-national-bank comparator scoring 2026-06-12 (SoFiUSD column only; per-cell basis in the Supplementary Materials); NEW5 = NYDFS-trust-charter comparator scoring (RLUSD column only; graded against primary documents and the verified on-chain contract; per-cell basis in the Supplementary Materials); JX = Exhibit 2 Category 5 jurisdiction matrix cells;"
              "RWA = grounded in the rwa.xyz platform snapshot of 2026-06-14, which also supplies the scale line under each product column header: market cap or AUM, '| N h' = all-network holder-address count where tracked; JPMD shows no scale line because a permissioned bank deposit token has no public supply or holder register and is not listed on rwa.xyz). Holder counts are all-network platform-wide wallet-address counts (not approved-investor counts), the basis rwa.xyz now reports directly; the prior cycle's Ethereum-chain Blockscout pulls remain available as an on-chain cross-check. "
              "USYC* = offshore (Reg S) comparator scoring (rwa.xyz-grounded: \\$3.0B AUM, 47 holders, exclusive USDC subscription/redemption); no full worked-example narrative (product unavailable to U.S. persons). "
              "USD1** = GENIUS-era comparator scoring (rwa.xyz-grounded: \\$4.4B market cap; issued and redeemed by BitGo Bank & Trust, N.A., an OCC-chartered national trust bank; majority of supply off-Ethereum); no worked-example narrative. "
